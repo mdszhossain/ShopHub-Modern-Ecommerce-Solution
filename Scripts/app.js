@@ -33,16 +33,16 @@ nav.innerHTML = `
                 <li>Wishlist</li>
             </ul>
             <div class="nav-right-icon">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-solid fa-cart-flatbed-suitcase"></i>
+                <i class="fa-solid fa-magnifying-glass text-[#2c2c2c]"></i>
+                <i class="fa-regular fa-heart text-[#2c2c2c]"></i>
+                <i class="fa-solid fa-cart-flatbed-suitcase text-[#2c2c2c]"></i>
             </div>
         </div>
     </div>
     <div class="nav-right-sm hidden sm:flex sm:gap-5">
-        <i class="fa-solid fa-magnifying-glass text-xl"></i>
-        <i class="fa-regular fa-heart text-xl"></i>
-        <i class="fa-solid fa-cart-flatbed-suitcase text-xl"></i>
+        <i class="fa-solid fa-magnifying-glass text-xl text-[#2c2c2c]"></i>
+        <i class="fa-regular fa-heart text-xl text-[#2c2c2c]"></i>
+        <i class="fa-solid fa-cart-flatbed-suitcase text-xl text-[#2c2c2c]"></i>
     </div>
 `;
 

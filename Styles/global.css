@@ -8,6 +8,15 @@ body {
 .nav-bar {
     box-shadow: 2px 2px 5px rgb(237, 237, 237);
 }
+.nav-pages li {
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.nav-pages li:hover {
+    background-color: #2F5AFB;
+    color: white;
+}
 
 @media (min-width: 250px) and (max-width: 639px) {
     .nav-bar {
@@ -28,6 +37,10 @@ body {
         background-color: white;
         text-align: center;
         border-radius: 5px;
+    }
+    .small-nav-pages li:hover {
+        background-color: #2F5AFB;
+        color: white;
     }
     .nav-right-icon {
         display: flex;

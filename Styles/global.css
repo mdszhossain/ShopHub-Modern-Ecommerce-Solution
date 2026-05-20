@@ -3,4 +3,59 @@
 
 body {
     font-family: "Inter", sans-serif;
+    background-color: #F9FAFB;
+}
+
+@media (min-width: 350px) and (max-width: 640px) {
+    .small-nav-pages {
+        /* margin-top: 50px; */
+    }
+    .nav-bar {
+        padding: 20px;
+    }
+    .nav-right {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: end;
+    }
+    .small-nav-pages {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .small-nav-pages li {
+        background-color: white;
+        text-align: center;
+        border-radius: 5px;
+    }
+    .nav-right-icon {
+        display: flex;
+        gap: 15px;
+        font-size: 20px;
+    }
+    .hamburger-bottom {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    /* .hamburger-hide {
+        display: none;
+    } */
+    .hide-item {
+        display: none;
+    }
+    #hamburger-ic, #cross-ic {
+        pointer-events: none;
+    }
+    #hamburger-icon {
+        height: 40px;
+        width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 5px 5px 20px rgb(219, 219, 219);
+    }
 }

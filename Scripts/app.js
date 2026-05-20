@@ -62,3 +62,27 @@ hamburgerIcon.addEventListener("click", function(event) {
     crossIc.classList.toggle("hide-item");
     hamburgerBottom.classList.toggle("hide-item");
 })
+
+
+// Under Main -> Hero Section Creation
+let heroSection = document.createElement("section");
+heroSection.classList.add(
+    "hero-section",
+    "sm:p-8",
+    "md:px-20",
+    "bg-gradient-to-r",
+    "from-[#2563EB]",
+    "via-[#6366F1]",
+    "to-[#A855F7]"
+);
+
+heroSection.innerHTML = `
+    <h1 class="hero-heading text-3xl text-center font-bold text-[#FFFFFF] pt-10 mb-5 sm:text-left sm:text-4xl md:text-5xl">Welcome to ShopHub</h1>
+    <p class="w-10/12 text-center text-[#FFFFFF] m-auto mb-5 sm:text-left sm:ml-0 sm:w-8/12 md:text-xl md:w-9/12 lg:w-6/12 xl:w-4/12">Discover amazing products at unbeatable prices. Shop the latest trends in electronics, fashion, and more.</p>
+    <div class="pb-10 flex justify-center sm:justify-start">
+        <button class="bg-[#FFFFFF] p-3 rounded-xl text-[#3758FB] font-bold">Shop Now <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+`;
+
+let main = document.querySelector("main");
+main.appendChild(heroSection);

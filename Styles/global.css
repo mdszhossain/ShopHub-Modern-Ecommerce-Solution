@@ -34,9 +34,10 @@ body {
         gap: 10px;
     }
     .small-nav-pages li {
-        background-color: white;
+        background-color: #f7f7f7;
         text-align: center;
         border-radius: 5px;
+        box-shadow: 1px 1px 2px rgb(212, 212, 212);
     }
     .small-nav-pages li:hover {
         background-color: #2F5AFB;

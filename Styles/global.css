@@ -5,11 +5,11 @@ body {
     font-family: "Inter", sans-serif;
     background-color: #F9FAFB;
 }
+.nav-bar {
+    box-shadow: 2px 2px 5px rgb(237, 237, 237);
+}
 
-@media (min-width: 350px) and (max-width: 640px) {
-    .small-nav-pages {
-        /* margin-top: 50px; */
-    }
+@media (min-width: 250px) and (max-width: 639px) {
     .nav-bar {
         padding: 20px;
     }

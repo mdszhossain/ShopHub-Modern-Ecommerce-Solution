@@ -6,7 +6,7 @@ body {
     background-color: #F9FAFB;
 }
 .nav-bar {
-    box-shadow: 2px 2px 5px rgb(237, 237, 237);
+    box-shadow: 1px 1px 2px rgb(67, 67, 67);
 }
 .nav-pages li {
     padding: 8px;
@@ -16,6 +16,12 @@ body {
 .nav-pages li:hover {
     background-color: #2F5AFB;
     color: white;
+}
+.nav-right-sm i:hover {
+    color: #2F5AFB;
+}
+.facility-section {
+    box-shadow: 1px 1px 2px rgb(219, 219, 219);
 }
 
 @media (min-width: 250px) and (max-width: 639px) {
@@ -47,6 +53,9 @@ body {
         display: flex;
         gap: 15px;
         font-size: 20px;
+    }
+    .nav-right-icon i:hover {
+        color: #2F5AFB;
     }
     .hamburger-bottom {
         display: flex;

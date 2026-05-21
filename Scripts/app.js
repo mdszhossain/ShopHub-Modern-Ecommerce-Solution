@@ -16,9 +16,9 @@ nav.innerHTML = `
             <span id="logo-text" class="text-[#2c2c2c]">ShopHub</span>
         </div>
         <ul class="nav-pages hidden sm:flex sm:gap-5">
-            <li>Home</li>
-            <li>Products</li>
-            <li>Wishlist</li>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./products.html">Products</a></li>
+            <li><a>Wishlist</a></li>
         </ul>
     </div>
     <div class="nav-right text-right sm:hidden">
@@ -28,9 +28,9 @@ nav.innerHTML = `
         </div>
         <div id="hambg-bottom" class="hamburger-bottom hide-item">
             <ul class="small-nav-pages">
-                <li>Home</li>
-                <li>Products</li>
-                <li>Wishlist</li>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./products.html">Products</a></li>
+                <li><a>Wishlist</a></li>
             </ul>
             <div class="nav-right-icon">
                 <i class="fa-solid fa-magnifying-glass text-[#2c2c2c]"></i>
@@ -86,8 +86,10 @@ heroSection.innerHTML = `
     </div>
 `;
 
-let main = document.querySelector("main");
-main.appendChild(heroSection);
+let indexContainer = document.querySelector(".index-container");
+if (indexContainer) {
+    indexContainer.appendChild(heroSection);
+}
 
 // Facility Section Creation
 let facilitySection = document.createElement("section");
@@ -143,7 +145,9 @@ facilitySection.innerHTML = `
     </div>
 `;
 
-main.appendChild(facilitySection);
+if (indexContainer) {
+    indexContainer.appendChild(facilitySection);
+}
 
 // Category Section Creation
 let categorySection = document.createElement("section");
@@ -169,7 +173,9 @@ categorySection.innerHTML = `
     </div>
 `;
 
-main.appendChild(categorySection);
+if (indexContainer) {
+    indexContainer.appendChild(categorySection);
+}
 
 // Featured Product Section Creation
 let featuredProduct = document.createElement("section");
@@ -191,48 +197,48 @@ featuredProduct.innerHTML = `
     </div>
 `;
 
-main.appendChild(featuredProduct);
+if (indexContainer) {
+    indexContainer.appendChild(featuredProduct);
 
-// card information fetching
-
-async function featuredCardInfoFetch() {
-    try {
-        let res = await axios.get("https://fakestoreapi.com/products?limit=8");
-        return res.data;
-    } catch (err) {
-        console.log(err);
+    async function featuredCardInfoFetch() {
+        try {
+            let res = await axios.get(
+                "https://fakestoreapi.com/products?limit=8",
+            );
+            return res.data;
+        } catch (err) {
+            console.log(err);
+        }
     }
-}
 
-// Featured Cards Container creation
-let featuredCards = document.createElement("div");
-featuredCards.classList.add(
-    "featured-cards",
-    "sm:w-full",
-    "grid",
-    "gap-10",
-    "grid-cols-1",
-    "sm:grid-cols-2",
-    "lg:grid-cols-3",
-    "xl:grid-cols-4",
-    "mt-15"
-);
-featuredProduct.appendChild(featuredCards);
+    // Featured Cards Container creation
+    let featuredCards = document.createElement("div");
+    featuredCards.classList.add(
+        "featured-cards",
+        "sm:w-full",
+        "grid",
+        "gap-10",
+        "grid-cols-1",
+        "sm:grid-cols-2",
+        "lg:grid-cols-3",
+        "xl:grid-cols-4",
+        "mt-15",
+    );
 
-featuredCardInfoFetch().then((data) => {
-    let products = data;
-    console.log(products);
-    for (product of products) {
-        let card = document.createElement("div");
-        card.classList.add(
-            "card",
-            "overflow-hidden",
-            "bg-[#F7F9FC]",
-            "rounded-3xl",
-            "shadow-[0_2px_12px_rgba(0,0,0,0.3)]",
-            "w-full"
-        );
-        card.innerHTML = `
+    featuredCardInfoFetch().then((data) => {
+        let products = data;
+        console.log(products);
+        for (product of products) {
+            let card = document.createElement("div");
+            card.classList.add(
+                "card",
+                "overflow-hidden",
+                "bg-[#F7F9FC]",
+                "rounded-3xl",
+                "shadow-[0_2px_12px_rgba(0,0,0,0.3)]",
+                "w-full",
+            );
+            card.innerHTML = `
             <div class="card-img relative h-80 bg-[#F1F3F5] rounded-t-3xl flex items-center justify-center p-6">
                 <img 
                     src="${product.image}" 
@@ -263,6 +269,77 @@ featuredCardInfoFetch().then((data) => {
                 </div>
             </div>
         `;
-        featuredCards.appendChild(card);
+            featuredCards.appendChild(card);
+        }
+    });
+
+    if (featuredProduct) {
+        featuredProduct.appendChild(featuredCards);
     }
-});
+}
+
+// card information fetching
+
+// Search bar creation
+let allProductSection = document.createElement("section");
+allProductSection.classList.add(
+    "all-product-section",
+    "relative",
+    "top-30",
+    "sm:p-8",
+    "md:px-20",
+);
+allProductSection.innerHTML = `
+    <div class="all-products-text text-center sm:text-left">
+        <h2 class="all-product-title font-bold text-2xl">All Products</h2>
+        <p class="all-product-desc mt-2">Browse our complete collection</p>
+    </div>
+    <form class="search-container py-10 flex flex-col sm:flex-row sm:w-full sm:px-5 rounded-2xl mt-10 gap-5 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.3)] w-10/12 xl:w-8/12 m-auto">
+        <!-- <input class="search-bar w-10/12 m-auto p-2" type="search" placeholder="search products"> -->
+            <div class="relative w-10/12 max-w-xl m-auto">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none text-[#94A3B8]">
+                <i class="fa-solid fa-magnifying-glass text-lg"></i>
+            </div>
+            
+            <input 
+                type="search" 
+                placeholder="Search products..." 
+                class="w-full lg:w-11/12 pl-13 pr-5 py-3.5 bg-white text-[#1E293B] placeholder-[#94A3B8] text-base rounded-2xl border border-[#E2E8F0] focus:outline-none focus:border-[#155DFB] focus:ring-1 focus:ring-[#155DFB] transition-all"
+            />
+        </div>
+        <div class="relative w-10/12 m-auto sm:w-64">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#94A3B8]">
+                <i class="fa-solid fa-sliders text-base"></i>
+            </div>
+            
+            <select class="w-full pl-11 pr-10 py-3.5 bg-white text-[#1E293B] font-medium text-base rounded-2xl border border-[#E2E8F0] appearance-none focus:outline-none focus:border-[#155DFB] focus:ring-1 focus:ring-[#155DFB] transition-all cursor-pointer">
+                <option value="">All Categories</option>
+                <option value="electronics">Electronics</option>
+                <option value="jewelry">Jewelry</option>
+                <option value="mens-clothing">Men's Clothing</option>
+                <option value="womens-clothing">Women's Clothing</option>
+            </select>
+            
+            <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-[#94A3B8]">
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+            </div>
+        </div>
+        <div class="relative w-10/12 m-auto sm:w-64">
+            <select class="w-full pl-5 pr-10 py-3.5 bg-white text-[#1E293B] font-medium text-base rounded-2xl border border-[#E2E8F0] appearance-none focus:outline-none focus:border-[#155DFB] focus:ring-1 focus:ring-[#155DFB] transition-all cursor-pointer">
+                <option value="default">Sort by: Default</option>
+                <option value="low-to-high">Price: Low to High</option>
+                <option value="high-to-low">Price: High to Low</option>
+                <option value="rating">Customer Rating</option>
+            </select>
+            
+            <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-[#94A3B8]">
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+            </div>
+        </div>
+    </form>
+`;
+
+let productContainer = document.querySelector(".products-container");
+if (productContainer) {
+    productContainer.appendChild(allProductSection);
+}

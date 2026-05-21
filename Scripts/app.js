@@ -103,13 +103,14 @@ facilitySection.classList.add(
     "flex-wrap",
     "justify-center",
     "lg:justify-between",
-    "gap-8",
+    "xl:justify-center",
+    "gap-2",
     "py-10",
     "px-5",
 );
 
 facilitySection.innerHTML = `
-    <div class="flex flex-col items-center gap-2 p-5 h-50 w-50 xl:w-100">
+    <div class="flex flex-col items-center gap-2 p-5 h-40 w-60 xl:w-100">
         <div class="facility-icon-box h-15 w-15 rounded-full flex items-center justify-center bg-[#DBEAFE]">
             <i class="fa-solid fa-truck-fast text-[#3758fb] text-xl"></i>
         </div>
@@ -117,7 +118,7 @@ facilitySection.innerHTML = `
         <p class="text-center">On orders over $50</p>
     </div>
 
-    <div class="flex flex-col items-center gap-2 p-5 h-50 w-50 xl:w-100">
+    <div class="flex flex-col items-center gap-2 p-5 h-40 w-60 xl:w-100">
         <div class="facility-icon-box h-15 w-15 rounded-full flex items-center justify-center bg-[#DBEAFE]">
             <i class="fa-solid fa-shield-halved text-[#3758fb] text-xl"></i>
         </div>
@@ -125,7 +126,7 @@ facilitySection.innerHTML = `
         <p class="text-center">100% secure transactions</p>
     </div>
 
-    <div class="flex flex-col items-center gap-2 p-5 h-50 w-50 xl:w-100">
+    <div class="flex flex-col items-center gap-2 p-5 h-40 w-60 xl:w-100">
         <div class="facility-icon-box h-15 w-15 rounded-full flex items-center justify-center bg-[#DBEAFE]">
             <i class="fa-solid fa-wallet text-[#3758fb] text-xl"></i>
         </div>
@@ -133,7 +134,7 @@ facilitySection.innerHTML = `
         <p class="text-center">30-day return policy</p>
     </div>
 
-    <div class="flex flex-col items-center gap-2 p-5 h-50 w-50 xl:w-100">
+    <div class="flex flex-col items-center gap-2 p-5 h-40 w-60 xl:w-100">
         <div class="facility-icon-box h-15 w-15 rounded-full flex items-center justify-center bg-[#DBEAFE]">
             <i class="fa-brands fa-shopify text-[#3758fb] text-xl"></i>
         </div>
@@ -143,3 +144,29 @@ facilitySection.innerHTML = `
 `;
 
 main.appendChild(facilitySection);
+
+// Category Section Creation
+let categorySection = document.createElement("section");
+categorySection.classList.add(
+    "category-section",
+    "relative",
+    "top-30",
+    "sm:p-8",
+    "md:px-20",
+);
+
+categorySection.innerHTML = `
+    <div class="category-title text-center">
+        <h2 class="categ-title font-bold text-2xl md:text-3xl mb-3">Shop by Category</h2>
+        <p class="categ-desc">Browse our top categories</p>
+    </div>
+
+    <div class="categories text-2xl font-bold text-[#FFFFFF] text-center flex flex-wrap sm:justify-center xl:justify-evenly sm:gap-10 mt-10">
+        <div id="categ-box1" class="category-box h-50 w-50 xl:h-60 xl:w-60">Electronics</div>
+        <div id="categ-box2" class="category-box h-50 w-50 xl:h-60 xl:w-60">Jewelry</div>
+        <div id="categ-box3" class="category-box h-50 w-50 xl:h-60 xl:w-60">Mens Clothing</div>
+        <div id="categ-box4" class="category-box h-50 w-50 xl:h-60 xl:w-60">Womens Clothing</div>
+    </div>
+`;
+
+main.appendChild(categorySection);

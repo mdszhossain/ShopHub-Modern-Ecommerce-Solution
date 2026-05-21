@@ -1,9 +1,9 @@
 /* Global Font: Inter */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 body {
     font-family: "Inter", sans-serif;
-    background-color: #F9FAFB;
+    background-color: #f9fafb;
 }
 .nav-bar {
     box-shadow: 1px 1px 2px rgb(67, 67, 67);
@@ -14,59 +14,29 @@ body {
     cursor: pointer;
 }
 .nav-pages li:hover {
-    background-color: #2F5AFB;
+    background-color: #2f5afb;
     color: white;
 }
 .nav-right-sm i:hover {
-    color: #2F5AFB;
+    color: #2f5afb;
 }
 .facility-section {
     box-shadow: 1px 1px 2px rgb(219, 219, 219);
 }
-
-/* .category-box::before {
-    background-position: center;
-    transition: transform 0.4s ease;
-}
-.category-box:hover::before {
-    transform: scale(1.25);
-}
-
-#categ-box1 {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/images/electronics.jpeg");
-}
-#categ-box2 {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/images/jewelry.jpeg");
-}
-#categ-box3 {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/images/mens-clothing.jpeg");
-}
-#categ-box4 {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/images/womens-clothing.jpeg");
-}
 .category-box {
-    border-radius: 15px;
-} */
-
-.category-box {
-    position: relative; /* Essential for positioning the background layer */
-    overflow: hidden;   /* Prevents the scaled image from spilling outside the corners */
-    
-    /* Layout styling to center text */
+    position: relative;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Adjust based on your layout */
-    border-radius: 8px; 
-    
-    /* Text styling */
+    border-radius: 8px;
+
     color: white;
     font-weight: bold;
     font-family: sans-serif;
-    z-index: 1;         /* Keeps text safely above the background layer */
+    z-index: 1;
+    cursor: pointer;
 }
-
-/* Creating the background layer using pseudo-element */
 .category-box::before {
     content: "";
     position: absolute;
@@ -76,29 +46,36 @@ body {
     height: 100%;
     background-size: cover;
     background-position: center;
-    z-index: -1;        /* Pushes it behind the text */
-    
-    /* Smoothly animates the scale change over 0.4 seconds */
-    transition: transform 0.4s ease; 
+    z-index: -1;
+    transition: transform 0.4s ease;
 }
 
-/* Hover Effect: Scales the background image up by 25% */
 .category-box:hover::before {
     transform: scale(1.25);
 }
 
-/* Target the pseudo-element (::before) to apply images & overlays */
 #categ-box1::before {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/images/electronics.jpeg");
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("../assets/images/electronics.jpeg");
 }
 #categ-box2::before {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/images/jewelry.jpeg");
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("../assets/images/jewelry.jpeg");
 }
 #categ-box3::before {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/images/mens-clothing.jpeg");
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("../assets/images/mens-clothing.jpeg");
 }
 #categ-box4::before {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/images/womens-clothing.jpeg");
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("../assets/images/womens-clothing.jpeg");
+}
+.add-cart-btn:hover {
+    cursor: pointer;
 }
 
 @media (min-width: 250px) and (max-width: 639px) {
@@ -123,7 +100,7 @@ body {
         box-shadow: 1px 1px 2px rgb(212, 212, 212);
     }
     .small-nav-pages li:hover {
-        background-color: #2F5AFB;
+        background-color: #2f5afb;
         color: white;
     }
     .nav-right-icon {
@@ -132,20 +109,18 @@ body {
         font-size: 20px;
     }
     .nav-right-icon i:hover {
-        color: #2F5AFB;
+        color: #2f5afb;
     }
     .hamburger-bottom {
         display: flex;
         flex-direction: column;
         gap: 20px;
     }
-    /* .hamburger-hide {
-        display: none;
-    } */
     .hide-item {
         display: none;
     }
-    #hamburger-ic, #cross-ic {
+    #hamburger-ic,
+    #cross-ic {
         pointer-events: none;
     }
     #hamburger-icon {
@@ -169,4 +144,15 @@ body {
         justify-content: center;
         gap: 20px;
     }
+    .featured-text-container {
+        flex-direction: column;
+    }
+
+    .featured-cards {
+        width: 80%;
+        margin: auto;
+        margin-top: 40px;
+    }
 }
+
+

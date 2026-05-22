@@ -215,13 +215,14 @@ if (indexContainer) {
     let featuredCards = document.createElement("div");
     featuredCards.classList.add(
         "featured-cards",
-        "sm:w-full",
+        "sm:w-11/12",
         "grid",
-        "gap-10",
+        "gap-5",
         "grid-cols-1",
         "sm:grid-cols-2",
         "lg:grid-cols-3",
         "xl:grid-cols-4",
+        "m-auto",
         "mt-15",
     );
 
@@ -237,11 +238,13 @@ if (indexContainer) {
                 "rounded-3xl",
                 "shadow-[0_2px_12px_rgba(0,0,0,0.3)]",
                 "w-full",
+                "md:w-11/12",
+                "m-auto"
             );
             card.innerHTML = `
-            <div class="card-img relative h-80 bg-[#F1F3F5] rounded-t-3xl flex items-center justify-center p-6">
+            <div class="card-img relative h-40 sm:h-50 bg-[#F1F3F5] rounded-t-3xl flex items-center justify-center p-6">
                 <img 
-                    src="${product.image}" 
+                    src="${product.image}"
                     alt="Fjallraven - Foldsack No. 1 Backpack" 
                     class="h-full w-full object-contain"
                 />
@@ -251,7 +254,7 @@ if (indexContainer) {
                 </button>
             </div>
 
-            <div class="card-info-box p-5 bg-white rounded-b-3xl h-full">
+            <div class="card-info-box p-5 bg-white rounded-b-3xl">
                 <div class="rate-and-stock text-sm flex items-center gap-1">
                     <i class="fa-solid fa-star text-amber-400 text-gold"></i>
                     <span class="rating font-medium text-gray-900">${product.rating.rate}</span>
@@ -262,7 +265,7 @@ if (indexContainer) {
                 <p class="text-[#6A778E] text-sm mt-1 uppercase">${product.category}</p>
                 
                 <div class="flex justify-between items-center mt-5">
-                    <span class="text-2xl font-bold text-gray-900">$<span class="prod-price">${product.price}</span></span>
+                    <span class="text-xl font-bold text-gray-900">$<span class="prod-price">${product.price}</span></span>
                     <button class="add-cart-btn px-5 py-2.5 bg-[#155DFB] hover:bg-[#0c4ad4] text-white font-medium rounded-xl text-sm flex items-center gap-2 transition-colors">
                         <i class="fa-solid fa-cart-shopping"></i> Add
                     </button>
@@ -385,13 +388,14 @@ if(productContainer) {
     let productCards = document.createElement("div");
     productCards.classList.add(
         "featured-cards",
-        "sm:w-full",
+        "sm:w-11/12",
         "grid",
-        "gap-10",
+        "gap-5",
         "grid-cols-1",
         "sm:grid-cols-2",
         "lg:grid-cols-3",
         "xl:grid-cols-4",
+        "m-auto",
         "mt-15",
     );
 
@@ -407,11 +411,13 @@ if(productContainer) {
                 "rounded-3xl",
                 "shadow-[0_2px_12px_rgba(0,0,0,0.3)]",
                 "w-full",
+                "md:w-11/12",
+                "m-auto"
             );
             card.innerHTML = `
-            <div class="card-img relative h-80 bg-[#F1F3F5] rounded-t-3xl flex items-center justify-center p-6">
+            <div class="card-img relative h-40 sm:h-50 bg-[#F1F3F5] rounded-t-3xl flex items-center justify-center p-6">
                 <img 
-                    src="${product.image}" 
+                    src="${product.image}"
                     alt="Fjallraven - Foldsack No. 1 Backpack" 
                     class="h-full w-full object-contain"
                 />
@@ -421,7 +427,7 @@ if(productContainer) {
                 </button>
             </div>
 
-            <div class="card-info-box p-5 bg-white rounded-b-3xl h-full">
+            <div class="card-info-box p-5 bg-white rounded-b-3xl">
                 <div class="rate-and-stock text-sm flex items-center gap-1">
                     <i class="fa-solid fa-star text-amber-400 text-gold"></i>
                     <span class="rating font-medium text-gray-900">${product.rating.rate}</span>
@@ -432,7 +438,7 @@ if(productContainer) {
                 <p class="text-[#6A778E] text-sm mt-1 uppercase">${product.category}</p>
                 
                 <div class="flex justify-between items-center mt-5">
-                    <span class="text-2xl font-bold text-gray-900">$<span class="prod-price">${product.price}</span></span>
+                    <span class="text-xl font-bold text-gray-900">$<span class="prod-price">${product.price}</span></span>
                     <button class="add-cart-btn px-5 py-2.5 bg-[#155DFB] hover:bg-[#0c4ad4] text-white font-medium rounded-xl text-sm flex items-center gap-2 transition-colors">
                         <i class="fa-solid fa-cart-shopping"></i> Add
                     </button>

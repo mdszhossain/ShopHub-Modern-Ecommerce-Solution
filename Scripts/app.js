@@ -292,7 +292,7 @@ allProductSection.classList.add(
 allProductSection.innerHTML = `
     <div class="all-products-text text-center sm:text-left">
         <h2 class="all-product-title font-bold text-2xl">All Products</h2>
-        <p class="all-product-desc mt-2">Browse our complete collection</p>
+        <p class="all-product-desc mt-2 text-[#555565]">Browse our complete collection</p>
     </div>
     <form class="search-container py-10 flex flex-col sm:flex-row sm:w-full sm:px-5 rounded-2xl mt-10 gap-5 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.3)] w-10/12 xl:w-8/12 m-auto">
         <!-- <input class="search-bar w-10/12 m-auto p-2" type="search" placeholder="search products"> -->
@@ -343,3 +343,110 @@ let productContainer = document.querySelector(".products-container");
 if (productContainer) {
     productContainer.appendChild(allProductSection);
 }
+
+let allProduct = document.createElement("section");
+allProduct.classList.add(
+    "featured-product",
+    "relative",
+    "top-40",
+    "sm:p-8",
+    "md:px-20",
+    "bg-white",
+);
+
+let totalProductsCount = document.createElement("div");
+totalProductsCount.classList.add(
+    "sm:p-8",
+    "md:px-20",
+    "total-products-count",
+    "relative",
+    "top-35",
+    "text-center",
+    "sm:text-left",
+    "text-[#555565]",
+);
+
+totalProductsCount.innerHTML = `
+    <p class="total-products">showing <span>20</span> of <span>20</span> products</p>
+`;
+
+if(productContainer) {
+    productContainer.appendChild(totalProductsCount);
+
+    async function allProductsFetch() {
+        try {
+            let res = await axios.get("https://fakestoreapi.com/products");
+            return res.data;
+        } catch(err) {
+            console.log("Data Not Found", err);
+        }
+    }
+
+    let productCards = document.createElement("div");
+    productCards.classList.add(
+        "featured-cards",
+        "sm:w-full",
+        "grid",
+        "gap-10",
+        "grid-cols-1",
+        "sm:grid-cols-2",
+        "lg:grid-cols-3",
+        "xl:grid-cols-4",
+        "mt-15",
+    );
+
+    allProductsFetch().then(data => {
+        let products = data;
+        console.log(products);
+        for (product of products) {
+            let card = document.createElement("div");
+            card.classList.add(
+                "card",
+                "overflow-hidden",
+                "bg-[#F7F9FC]",
+                "rounded-3xl",
+                "shadow-[0_2px_12px_rgba(0,0,0,0.3)]",
+                "w-full",
+            );
+            card.innerHTML = `
+            <div class="card-img relative h-80 bg-[#F1F3F5] rounded-t-3xl flex items-center justify-center p-6">
+                <img 
+                    src="${product.image}" 
+                    alt="Fjallraven - Foldsack No. 1 Backpack" 
+                    class="h-full w-full object-contain"
+                />
+                
+                <button class="absolute top-4 right-4 bg-white p-3 rounded-full shadow-md text-gray-400 hover:text-red-500 transition-colors">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="card-info-box p-5 bg-white rounded-b-3xl h-full">
+                <div class="rate-and-stock text-sm flex items-center gap-1">
+                    <i class="fa-solid fa-star text-amber-400 text-gold"></i>
+                    <span class="rating font-medium text-gray-900">${product.rating.rate}</span>
+                    <span class="stock text-gray-400">(<span class="stock-count">${product.rating.count}</span>)</span>
+                </div>
+                
+                <h3 class="card-title text-lg font-medium mt-3 text-gray-900 line-clamp-1">${product.title}</h3>
+                <p class="text-[#6A778E] text-sm mt-1 uppercase">${product.category}</p>
+                
+                <div class="flex justify-between items-center mt-5">
+                    <span class="text-2xl font-bold text-gray-900">$<span class="prod-price">${product.price}</span></span>
+                    <button class="add-cart-btn px-5 py-2.5 bg-[#155DFB] hover:bg-[#0c4ad4] text-white font-medium rounded-xl text-sm flex items-center gap-2 transition-colors">
+                        <i class="fa-solid fa-cart-shopping"></i> Add
+                    </button>
+                </div>
+            </div>
+        `;
+            productCards.appendChild(card);
+        }
+    })
+
+    if (allProduct) {
+        allProduct.appendChild(productCards);
+    }
+    productContainer.appendChild(allProduct);
+}
+
+

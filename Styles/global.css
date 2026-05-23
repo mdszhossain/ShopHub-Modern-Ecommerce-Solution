@@ -83,6 +83,18 @@ body {
     height: 50px;
     border-radius: 10px;
 }
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 1px 1px 10px rgb(112, 112, 112);
+    cursor: pointer;
+}
+
+.heart-btn {
+    cursor: pointer;
+}
 
 @media (min-width: 250px) and (max-width: 639px) {
     .nav-bar {

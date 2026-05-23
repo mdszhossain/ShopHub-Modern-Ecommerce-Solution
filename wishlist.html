@@ -9,20 +9,28 @@
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <!-- Vanila CSS -->
         <link rel="stylesheet" href="./Styles/global.css">
-        <title>ShopHub-Modern-Ecommerce-Solution</title>
+        <title>Wishlist</title>
     </head>
     <body>
+
         <!-- Header Part -->
         <header class="fixed w-full z-5"></header>
 
         <!-- Main Part -->
         <main>
-            <div class="index-container"></div>
+            <div class="wishlist-container">
+                <section class="blank-wishlist-container relative top-70">
+                    <div class="blank-wishlist text-center">
+                        <div class="whishlist-heart-icon flex items-center justify-center text-5xl">
+                            <i class="fa-regular fa-heart"></i>
+                        </div>
+                        <h2 class="font-bold text-2xl mt-5">Your wishlist is empty</h2>
+                        <p class="mt-2">Start adding product you love!</p>
+                        <button class="bg-[#2F5AFB] text-white p-3 font-bold text-center rounded-xl mt-5">Browse Products <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </section>
+            </div>
         </main>
-
-        <!-- Footer Part -->
-        <footer></footer>
-
 
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

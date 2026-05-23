@@ -469,6 +469,13 @@ allProductsFetch().then((data) => {
         `;
         productCards.appendChild(card);
     }
+    let heartBtns = document.querySelectorAll(".heart-btn");
+    for(let heartBtn of heartBtns) {
+        heartBtn.addEventListener("click", function(event) {
+            console.log(event.target.children[0]);
+            event.target.children[0].style.color = "red";
+        });
+    }
 });
 
 if (allProduct) {

@@ -266,6 +266,7 @@ featuredCardInfoFetch().then((data) => {
             "md:w-11/12",
             "m-auto",
         );
+        card.setAttribute("id", product.id);
         card.innerHTML = `
             <div class="card-img relative h-40 sm:h-50 bg-[#F1F3F5] rounded-t-3xl flex items-center justify-center p-6">
                 <img 
@@ -398,6 +399,40 @@ totalProductsCount.innerHTML = `
 
 productContainer.appendChild(totalProductsCount);
 
+// Wishlist blank Section Creation
+
+let blankWishlistSection = document.createElement("section");
+blankWishlistSection.classList.add(
+    "blank-wishlist-section",
+    "relative",
+    "top-70",
+    "sm:p-8",
+    "md:px-20",
+);
+blankWishlistSection.innerHTML = `
+    <div class="blank-wishlist-box text-center">
+        <i class="fa-regular fa-heart text-6xl text-[#D1D5DC]"></i>
+        <h2 class="blank-wishlist-heading font-bold text-2xl text-[#111828] mt-2">Your wishlist is empty</h2>
+        <p class="blank-wishlist-desc text-[#111828] mt-2">Start adding product you love!</p>
+        <button class="blank-wishlist-btn font-bold bg-[#155DFB] p-3 text-white rounded-xl mt-5">Browse Products <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+`;
+wishlistContainer.appendChild(blankWishlistSection);
+
+let wishlistCardsContainer = document.createElement("section");
+wishlistCardsContainer.classList.add(
+    "wishlist-cards-container",
+    "relative",
+    "top-40",
+    "sm:p-8",
+    "md:px-20",
+    "grid",
+    "sm:grid-cols-2",
+    "lg:grid-cols-3",
+    "xl:grid-cols-4",
+    "gap-10",
+);
+
 async function allProductsFetch() {
     try {
         let res = await axios.get("https://fakestoreapi.com/products");
@@ -436,6 +471,7 @@ allProductsFetch().then((data) => {
             "md:w-11/12",
             "m-auto",
         );
+        card.setAttribute("id", product.id);
         card.innerHTML = `
             <div class="card-img relative h-40 sm:h-50 bg-[#F1F3F5] rounded-t-3xl flex items-center justify-center p-6">
                 <img 
@@ -470,11 +506,108 @@ allProductsFetch().then((data) => {
         productCards.appendChild(card);
     }
     let heartBtns = document.querySelectorAll(".heart-btn");
-    for(let heartBtn of heartBtns) {
-        heartBtn.addEventListener("click", function(event) {
-            console.log(event.target.children[0]);
+    for (let heartBtn of heartBtns) {
+        heartBtn.addEventListener("click", function (event) {
             event.target.children[0].style.color = "red";
+
+            // wishlist card creation
+            let card = document.createElement("div");
+            card.classList.add(
+                "card",
+                "overflow-hidden",
+                "bg-[#F7F9FC]",
+                "rounded-3xl",
+                "shadow-[0_2px_12px_rgba(0,0,0,0.3)]",
+                "w-full",
+                "md:w-11/12",
+                "m-auto",
+            );
+            card.setAttribute(
+                "id",
+                event.currentTarget.parentElement.parentElement.id,
+            );
+            card.innerHTML = `
+                <div class="card-img relative h-40 sm:h-50 bg-[#F1F3F5] rounded-t-3xl flex items-center justify-center p-6">
+                    <img 
+                        src="${event.currentTarget.parentElement.querySelector("img").src}"
+                        alt="Fjallraven - Foldsack No. 1 Backpack" 
+                        class="h-full w-full object-contain"
+                    />
+                    
+                    <button class="heart-btn absolute top-4 right-4 bg-white p-3 rounded-full shadow-md text-gray-400 hover:text-red-500 transition-colors">
+                        <i class="fa-solid fa-heart text-red-500"></i>
+                    </button>
+                </div>
+
+                <div class="card-info-box p-5 bg-white rounded-b-3xl">
+                    <div class="rate-and-stock text-sm flex items-center gap-1">
+                        <i class="fa-solid fa-star text-amber-400 text-gold"></i>
+                        <span class="rating font-medium text-gray-900">${event.currentTarget.parentElement.nextElementSibling.children[0].children[1].innerText}</span>
+                        <span class="stock text-gray-400">(<span class="stock-count">${event.currentTarget.parentElement.nextElementSibling.children[0].children[2].innerText}</span>)</span>
+                    </div>
+                    
+                    <h3 class="card-title text-lg font-medium mt-3 text-gray-900 line-clamp-1">${event.currentTarget.parentElement.nextElementSibling.children[1].innerText}</h3>
+                    <p class="prod-category text-[#6A778E] text-sm mt-1 uppercase">${event.currentTarget.parentElement.nextElementSibling.children[2].innerText}</p>
+                    
+                    <div class="flex justify-between items-center mt-5">
+                        <span class="text-xl font-bold text-gray-900">$<span class="prod-price">${event.currentTarget.parentElement.nextElementSibling.children[3].children[0].children[0].innerText}</span></span>
+                        <button class="add-cart-btn w-6/12 px-5 py-2.5 bg-[#155DFB] hover:bg-[#0c4ad4] text-white font-medium rounded-xl text-sm flex items-center justify-center gap-2 transition-colors">
+                            <i class="fa-solid fa-cart-shopping"></i> Add
+                        </button>
+                        <button class="wishlist-dlt bg-red-100 p-1 rounded-lg"><i class="fa-regular fa-trash-can text-red-500"></i></button>
+                    </div>
+                </div>
+            `;
+            wishlistCardsContainer.appendChild(card);
+            wishlistInitialText.classList.remove("hidden");
+            blankWishlistSection.classList.add("hidden");
+            
+            let wishlistDlts = wishlistCardsContainer.querySelectorAll(".wishlist-dlt");
+            wishlistCardsContainer.addEventListener("click", function(event) {
+                event.stopPropagation();
+
+                // find the closest card element from the clicked target
+                const cardEl = event.target.closest('.card');
+                if (!cardEl) return;
+
+                // capture container before removing
+                const container = cardEl.parentElement;
+                if (!container) {
+                    console.warn('Wishlist container not found for clicked card');
+                    return;
+                }
+
+                // restore color on the original element (if card has an id referring to the source)
+                const redRemove = cardEl.getAttribute('id');
+                if (redRemove) {
+                    const orig = document.getElementById(redRemove);
+                    if (orig) {
+                        // prefer a robust selector for the heart icon in the original card
+                        const origIcon = orig.querySelector('.heart-btn i') || orig.querySelector('i.fa-heart');
+                        if (origIcon) {
+                            origIcon.style.color = "#99A0AE";
+                        }
+                    }
+                }
+
+                // debug before removal
+
+                // remove the card element
+                cardEl.remove();
+
+                // update UI if no more cards remain
+                if (container.children && container.children.length === 0) {
+                    wishlistInitialText.classList.add("hidden");
+                    blankWishlistSection.classList.remove("hidden");
+                }
+            })
+
         });
+        wishlistContainer.appendChild(wishlistCardsContainer);
+        let wishlistInitialText = document.querySelector(
+            ".wishlist-initial-text",
+        );
+        
     }
 });
 

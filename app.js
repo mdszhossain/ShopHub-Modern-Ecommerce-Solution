@@ -16,9 +16,9 @@ nav.innerHTML = `
             <span id="logo-text" class="text-[#2c2c2c]">ShopHub</span>
         </div>
         <ul class="nav-pages hidden sm:flex sm:gap-5">
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./products.html">Products</a></li>
-            <li><a href="./wishlist.html">Wishlist</a></li>
+            <li class="home" >Home</li>
+            <li class="products" >Products</li>
+            <li class="wishlists" >Wishlist</li>
         </ul>
     </div>
     <div class="nav-right text-right sm:hidden">
@@ -28,9 +28,9 @@ nav.innerHTML = `
         </div>
         <div id="hambg-bottom" class="hamburger-bottom hide-item">
             <ul class="small-nav-pages">
-                <li><a href="./index.html">Home</a></li>
-                <li><a href="./products.html">Products</a></li>
-                <li><a href="./wishlist.html">Wishlist</a></li>
+                <li class="home" >Home</li>
+                <li class="products" >Products</li>
+                <li class="wishlists" >Wishlists</li>
             </ul>
             <div class="nav-right-icon">
                 <i class="fa-solid fa-magnifying-glass text-[#2c2c2c]"></i>
@@ -48,6 +48,41 @@ nav.innerHTML = `
 
 let header = document.querySelector("header");
 header.appendChild(nav);
+
+let homes = document.querySelectorAll(".home");
+let products = document.querySelectorAll(".products");
+let wishlists = document.querySelectorAll(".wishlists");
+
+let indexContainer = document.querySelector(".index-container");
+let productsContainer = document.querySelector(".products-container");
+let wishlistContainer = document.querySelector(".wishlist-container");
+
+for (let home of homes) {
+    home.addEventListener("click", function () {
+        indexContainer.classList.remove("hidden");
+        productsContainer.classList.add("hidden");
+        wishlistContainer.classList.add("hidden");
+        window.scrollTo(0, 0);
+    });
+}
+
+for (let prod of products) {
+    prod.addEventListener("click", function (event) {
+        indexContainer.classList.add("hidden");
+        wishlistContainer.classList.add("hidden");
+        productsContainer.classList.remove("hidden");
+        window.scrollTo(0, 0);
+    });
+}
+
+for (let wishlist of wishlists) {
+    wishlist.addEventListener("click", function (event) {
+        indexContainer.classList.add("hidden");
+        wishlistContainer.classList.remove("hidden");
+        productsContainer.classList.add("hidden");
+        window.scrollTo(0, 0);
+    });
+}
 
 // Hamburger Logic
 let hamburgerIc = document.getElementById("hamburger-ic");
@@ -86,10 +121,7 @@ heroSection.innerHTML = `
     </div>
 `;
 
-let indexContainer = document.querySelector(".index-container");
-if (indexContainer) {
-    indexContainer.appendChild(heroSection);
-}
+indexContainer.appendChild(heroSection);
 
 // Facility Section Creation
 let facilitySection = document.createElement("section");
@@ -145,9 +177,7 @@ facilitySection.innerHTML = `
     </div>
 `;
 
-if (indexContainer) {
-    indexContainer.appendChild(facilitySection);
-}
+indexContainer.appendChild(facilitySection);
 
 // Category Section Creation
 let categorySection = document.createElement("section");
@@ -173,9 +203,7 @@ categorySection.innerHTML = `
     </div>
 `;
 
-if (indexContainer) {
-    indexContainer.appendChild(categorySection);
-}
+indexContainer.appendChild(categorySection);
 
 // Featured Product Section Creation
 let featuredProduct = document.createElement("section");
@@ -197,52 +225,48 @@ featuredProduct.innerHTML = `
     </div>
 `;
 
-if (indexContainer) {
-    indexContainer.appendChild(featuredProduct);
+indexContainer.appendChild(featuredProduct);
 
-    async function featuredCardInfoFetch() {
-        try {
-            let res = await axios.get(
-                "https://fakestoreapi.com/products?limit=8",
-            );
-            return res.data;
-        } catch (err) {
-            console.log(err);
-        }
+async function featuredCardInfoFetch() {
+    try {
+        let res = await axios.get("https://fakestoreapi.com/products?limit=8");
+        return res.data;
+    } catch (err) {
+        console.log(err);
     }
+}
 
-    // Featured Cards Container creation
-    let featuredCards = document.createElement("div");
-    featuredCards.classList.add(
-        "featured-cards",
-        "sm:w-11/12",
-        "grid",
-        "gap-5",
-        "md:gap-8",
-        "grid-cols-1",
-        "sm:grid-cols-2",
-        "lg:grid-cols-3",
-        "xl:grid-cols-4",
-        "m-auto",
-        "mt-15",
-    );
+// Featured Cards Container creation
+let featuredCards = document.createElement("div");
+featuredCards.classList.add(
+    "featured-cards",
+    "sm:w-11/12",
+    "grid",
+    "gap-5",
+    "md:gap-8",
+    "grid-cols-1",
+    "sm:grid-cols-2",
+    "lg:grid-cols-3",
+    "xl:grid-cols-4",
+    "m-auto",
+    "mt-15",
+);
 
-    featuredCardInfoFetch().then((data) => {
-        let products = data;
-        console.log(products);
-        for (product of products) {
-            let card = document.createElement("div");
-            card.classList.add(
-                "card",
-                "overflow-hidden",
-                "bg-[#F7F9FC]",
-                "rounded-3xl",
-                "shadow-[0_2px_12px_rgba(0,0,0,0.3)]",
-                "w-full",
-                "md:w-11/12",
-                "m-auto",
-            );
-            card.innerHTML = `
+featuredCardInfoFetch().then((data) => {
+    let products = data;
+    for (product of products) {
+        let card = document.createElement("div");
+        card.classList.add(
+            "card",
+            "overflow-hidden",
+            "bg-[#F7F9FC]",
+            "rounded-3xl",
+            "shadow-[0_2px_12px_rgba(0,0,0,0.3)]",
+            "w-full",
+            "md:w-11/12",
+            "m-auto",
+        );
+        card.innerHTML = `
             <div class="card-img relative h-40 sm:h-50 bg-[#F1F3F5] rounded-t-3xl flex items-center justify-center p-6">
                 <img 
                     src="${product.image}"
@@ -263,7 +287,7 @@ if (indexContainer) {
                 </div>
                 
                 <h3 class="card-title text-lg font-medium mt-3 text-gray-900 line-clamp-1">${product.title}</h3>
-                <p class="text-[#6A778E] text-sm mt-1 uppercase">${product.category}</p>
+                <p class="prod-category text-[#6A778E] text-sm mt-1 uppercase">${product.category}</p>
                 
                 <div class="flex justify-between items-center mt-5">
                     <span class="text-xl font-bold text-gray-900">$<span class="prod-price">${product.price}</span></span>
@@ -273,13 +297,12 @@ if (indexContainer) {
                 </div>
             </div>
         `;
-            featuredCards.appendChild(card);
-        }
-    });
-
-    if (featuredProduct) {
-        featuredProduct.appendChild(featuredCards);
+        featuredCards.appendChild(card);
     }
+});
+
+if (featuredProduct) {
+    featuredProduct.appendChild(featuredCards);
 }
 
 // card information fetching
@@ -344,9 +367,8 @@ allProductSection.innerHTML = `
 `;
 
 let productContainer = document.querySelector(".products-container");
-if (productContainer) {
-    productContainer.appendChild(allProductSection);
-}
+
+productContainer.appendChild(allProductSection);
 
 let allProduct = document.createElement("section");
 allProduct.classList.add(
@@ -374,49 +396,47 @@ totalProductsCount.innerHTML = `
     <p class="total-products">showing <span>20</span> of <span>20</span> products</p>
 `;
 
-if (productContainer) {
-    productContainer.appendChild(totalProductsCount);
+productContainer.appendChild(totalProductsCount);
 
-    async function allProductsFetch() {
-        try {
-            let res = await axios.get("https://fakestoreapi.com/products");
-            return res.data;
-        } catch (err) {
-            console.log("Data Not Found", err);
-        }
+async function allProductsFetch() {
+    try {
+        let res = await axios.get("https://fakestoreapi.com/products");
+        return res.data;
+    } catch (err) {
+        console.log("Data Not Found", err);
     }
+}
 
-    let productCards = document.createElement("div");
-    productCards.classList.add(
-        "featured-cards",
-        "sm:w-11/12",
-        "grid",
-        "gap-5",
-        "md:gap-8",
-        "grid-cols-1",
-        "sm:grid-cols-2",
-        "lg:grid-cols-3",
-        "xl:grid-cols-4",
-        "m-auto",
-        "mt-15",
-    );
+let productCards = document.createElement("div");
+productCards.classList.add(
+    "featured-cards",
+    "sm:w-11/12",
+    "grid",
+    "gap-5",
+    "md:gap-8",
+    "grid-cols-1",
+    "sm:grid-cols-2",
+    "lg:grid-cols-3",
+    "xl:grid-cols-4",
+    "m-auto",
+    "mt-15",
+);
 
-    allProductsFetch().then((data) => {
-        let products = data;
-        console.log(products);
-        for (product of products) {
-            let card = document.createElement("div");
-            card.classList.add(
-                "card",
-                "overflow-hidden",
-                "bg-[#F7F9FC]",
-                "rounded-3xl",
-                "shadow-[0_2px_12px_rgba(0,0,0,0.3)]",
-                "w-full",
-                "md:w-11/12",
-                "m-auto",
-            );
-            card.innerHTML = `
+allProductsFetch().then((data) => {
+    let products = data;
+    for (product of products) {
+        let card = document.createElement("div");
+        card.classList.add(
+            "card",
+            "overflow-hidden",
+            "bg-[#F7F9FC]",
+            "rounded-3xl",
+            "shadow-[0_2px_12px_rgba(0,0,0,0.3)]",
+            "w-full",
+            "md:w-11/12",
+            "m-auto",
+        );
+        card.innerHTML = `
             <div class="card-img relative h-40 sm:h-50 bg-[#F1F3F5] rounded-t-3xl flex items-center justify-center p-6">
                 <img 
                     src="${product.image}"
@@ -437,7 +457,7 @@ if (productContainer) {
                 </div>
                 
                 <h3 class="card-title text-lg font-medium mt-3 text-gray-900 line-clamp-1">${product.title}</h3>
-                <p class="text-[#6A778E] text-sm mt-1 uppercase">${product.category}</p>
+                <p class="prod-category text-[#6A778E] text-sm mt-1 uppercase">${product.category}</p>
                 
                 <div class="flex justify-between items-center mt-5">
                     <span class="text-xl font-bold text-gray-900">$<span class="prod-price">${product.price}</span></span>
@@ -447,24 +467,11 @@ if (productContainer) {
                 </div>
             </div>
         `;
-            productCards.appendChild(card);
-        }
-        let heartBtns = document.querySelectorAll(".heart-btn");
-        for (let heartBtn of heartBtns) {
-            heartBtn.addEventListener("click", function (event) {
-                const icon = this.children[0];
-                if (icon.style.color === "red") {
-                    icon.style.color = "";
-                } else {
-                    icon.style.color = "red";
-                }
-            });
-        }
-
-    });
-
-    if (allProduct) {
-        allProduct.appendChild(productCards);
+        productCards.appendChild(card);
     }
-    productContainer.appendChild(allProduct);
+});
+
+if (allProduct) {
+    allProduct.appendChild(productCards);
 }
+productContainer.appendChild(allProduct);

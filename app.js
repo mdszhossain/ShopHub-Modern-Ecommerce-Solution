@@ -302,9 +302,7 @@ featuredCardInfoFetch().then((data) => {
     }
 });
 
-if (featuredProduct) {
     featuredProduct.appendChild(featuredCards);
-}
 
 // card information fetching
 
@@ -340,12 +338,12 @@ allProductSection.innerHTML = `
                 <i class="fa-solid fa-sliders text-base"></i>
             </div>
             
-            <select class="w-full pl-11 pr-10 py-3.5 bg-white text-[#1E293B] font-medium text-base rounded-2xl border border-[#E2E8F0] appearance-none focus:outline-none focus:border-[#155DFB] focus:ring-1 focus:ring-[#155DFB] transition-all cursor-pointer">
+            <select class="category-value w-full pl-11 pr-10 py-3.5 bg-white text-[#1E293B] font-medium text-base rounded-2xl border border-[#E2E8F0] appearance-none focus:outline-none focus:border-[#155DFB] focus:ring-1 focus:ring-[#155DFB] transition-all cursor-pointer">
                 <option value="">All Categories</option>
                 <option value="electronics">Electronics</option>
-                <option value="jewelry">Jewelry</option>
-                <option value="mens-clothing">Men's Clothing</option>
-                <option value="womens-clothing">Women's Clothing</option>
+                <option value="jewelery">Jewelry</option>
+                <option value="men's clothing">Men's Clothing</option>
+                <option value="women's clothing">Women's Clothing</option>
             </select>
             
             <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-[#94A3B8]">
@@ -444,7 +442,7 @@ async function allProductsFetch() {
 
 let productCards = document.createElement("div");
 productCards.classList.add(
-    "featured-cards",
+    "products-cards",
     "sm:w-11/12",
     "grid",
     "gap-5",
@@ -615,3 +613,80 @@ if (allProduct) {
     allProduct.appendChild(productCards);
 }
 productContainer.appendChild(allProduct);
+
+const categorySelect = document.querySelector(".category-value");
+
+let fetchCategoryName = async () => {
+    if (!categorySelect) return;
+
+    let categoryValue = categorySelect.value;
+    let productsByCategory;
+
+    if (categoryValue === "") {
+        productsByCategory = await allProductsFetch();
+    } else {
+        productsByCategory = await getProductsByCategory(categoryValue);
+    }
+
+    console.log("Products by category:", categoryValue, productsByCategory);
+    createCards(productsByCategory);
+};
+
+function createCards(products) {
+    productCards.innerHTML = "";
+    for (let product of products) {
+        let card = document.createElement("div");
+        card.classList.add(
+            "card",
+            "overflow-hidden",
+            "bg-[#F7F9FC]",
+            "rounded-3xl",
+            "shadow-[0_2px_12px_rgba(0,0,0,0.3)]",
+            "w-full",
+            "md:w-11/12",
+            "m-auto",
+        );
+        card.setAttribute("id", product.id);
+        card.innerHTML = `
+            <div class="card-img relative h-40 sm:h-50 bg-[#F1F3F5] rounded-t-3xl flex items-center justify-center p-6">
+                <img 
+                    src="${product.image}"
+                    alt="${product.title}" 
+                    class="h-full w-full object-contain"
+                />
+                
+                <button class="heart-btn absolute top-4 right-4 bg-white p-3 rounded-full shadow-md text-gray-400 hover:text-red-500 transition-colors">
+                    <i class="fa-solid fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="card-info-box p-5 bg-white rounded-b-3xl">
+                <div class="rate-and-stock text-sm flex items-center gap-1">
+                    <i class="fa-solid fa-star text-amber-400 text-gold"></i>
+                    <span class="rating font-medium text-gray-900">${product.rating.rate}</span>
+                    <span class="stock text-gray-400">(<span class="stock-count">${product.rating.count}</span>)</span>
+                </div>
+                
+                <h3 class="card-title text-lg font-medium mt-3 text-gray-900 line-clamp-1">${product.title}</h3>
+                <p class="prod-category text-[#6A778E] text-sm mt-1 uppercase">${product.category}</p>
+                
+                <div class="flex justify-between items-center mt-5">
+                    <span class="text-xl font-bold text-gray-900">$<span class="prod-price">${product.price}</span></span>
+                    <button class="add-cart-btn px-5 py-2.5 bg-[#155DFB] hover:bg-[#0c4ad4] text-white font-medium rounded-xl text-sm flex items-center gap-2 transition-colors">
+                        <i class="fa-solid fa-cart-shopping"></i> Add
+                    </button>
+                </div>
+            </div>
+        `;
+        productCards.appendChild(card);
+    }
+}
+
+if (categorySelect) {
+    categorySelect.addEventListener("change", fetchCategoryName);
+}
+
+async function getProductsByCategory(category) {
+    let res = await axios.get(`https://fakestoreapi.com/products/category/${encodeURIComponent(category)}`);
+    return res.data;
+}
